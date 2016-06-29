@@ -1,0 +1,28 @@
+﻿<UserControl x:Class="ExchangeStats.Views.WelcomeScreen"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:c="clr-namespace:ExchangeStats.Controls"
+      mc:Ignorable="d">
+    <Grid>
+        <StackPanel>
+            <Image Source="pack://application:,,,/Static/SELogoBlack.png" Width="300" />
+            <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" Margin="0 0 0 20">
+                <Bold>ExchangeView v1.0</Bold>
+            </TextBlock>
+            <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" TextAlignment="Center" Margin="0 0 0 20">
+                Copyright © Owen Jenkins 2016 <LineBreak/>
+                Licensed under the MIT license.
+            </TextBlock>
+            <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" TextAlignment="Center" Margin="0 0 0 20">
+                All content shown by this client is sourced from the <c:BrowserLink TargetUri="http://stackexchange.com/">Stack
+                Exchange network</c:BrowserLink> and is the property of its respective author. You may re-use the content under the 
+                terms of CC BY-SA 3.0.
+            </TextBlock>
+            <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" TextAlignment="Center" Margin="0 0 0 20">
+                Neither this application nor its developers are affiliated with, or sponsored by, Stack Exchange, Inc.
+            </TextBlock>
+        </StackPanel>
+    </Grid>
+</UserControl>
