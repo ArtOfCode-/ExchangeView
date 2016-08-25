@@ -27,7 +27,7 @@
                 </StackPanel>
             </ScrollViewer>
         </Grid>
-        <Grid Name="ContentFrame" Grid.Column="1" HorizontalAlignment="Stretch">
+        <Grid Name="ContentFrame" Grid.Column="1" HorizontalAlignment="Stretch" Margin="5">
             <!-- This should probably remain empty, as its content gets set programmatically. -->
         </Grid>
     </Grid>

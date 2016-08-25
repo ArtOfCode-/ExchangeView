@@ -52,6 +52,10 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Runtime.Serialization" />
@@ -79,15 +83,32 @@
     <Compile Include="Contracts\ShallowUser.cs" />
     <Compile Include="Contracts\Site.cs" />
     <Compile Include="Contracts\Styling.cs" />
+    <Compile Include="Contracts\Tag.cs" />
+    <Compile Include="Contracts\TagWiki.cs" />
     <Compile Include="Controls\BrowserLink.cs" />
     <Compile Include="Controls\PlaceholderTextBox.cs" />
     <Compile Include="NumberFormatter.cs" />
     <Compile Include="StackApi.cs" />
+    <Compile Include="Views\ErrorReport.xaml.cs">
+      <DependentUpon>ErrorReport.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\QuestionPartial.xaml.cs">
       <DependentUpon>QuestionPartial.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\SiteHome.xaml.cs">
-      <DependentUpon>SiteHome.xaml</DependentUpon>
+    <Compile Include="Views\SiteBase.xaml.cs">
+      <DependentUpon>SiteBase.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SiteQuestions.xaml.cs">
+      <DependentUpon>SiteQuestions.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SiteTags.xaml.cs">
+      <DependentUpon>SiteTags.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SiteUsers.xaml.cs">
+      <DependentUpon>SiteUsers.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TagPartial.xaml.cs">
+      <DependentUpon>TagPartial.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\WelcomeScreen.xaml.cs">
       <DependentUpon>WelcomeScreen.xaml</DependentUpon>
@@ -104,11 +125,31 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\ErrorReport.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\QuestionPartial.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\SiteHome.xaml">
+    <Page Include="Views\SiteBase.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SiteQuestions.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SiteTags.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SiteUsers.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TagPartial.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -135,11 +176,16 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Install.bat" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <None Include="ResourceFiles\ErrorMessages.auto.json">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -170,7 +216,13 @@
   <ItemGroup>
     <Resource Include="Static\DefaultIcon.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="ResourceFiles\Generic.auto.json" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>xcopy /s /y "$(ProjectDir)ResourceFiles" "%25APPDATA%25\ExchangeStats\Resources"</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

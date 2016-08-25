@@ -164,8 +164,15 @@ namespace ExchangeStats
             }
 
             string responseData = RequestRawContent(requestUri);
-            ApiCache.AddCacheItem(requestUri, cacheExpiration, responseData);
-            return SerializeRawResponse<T>(responseData);
+            if (responseData != null)
+            {
+                ApiCache.AddCacheItem(requestUri, cacheExpiration, responseData);
+                return SerializeRawResponse<T>(responseData);
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

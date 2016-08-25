@@ -50,7 +50,7 @@ namespace ExchangeStats
 
             if (response == null)
             {
-                // TODO: Handle that somehow... Error report.
+                this.ChangeContent(new ErrorReport("An error occurred while fetching site names.", App.GetExceptionMessage("LoadingSites"), App.GetExceptionTechDetails("LoadingSites")));
                 return;
             }
 
@@ -67,6 +67,7 @@ namespace ExchangeStats
             StackPanel basePanel = new StackPanel();
             basePanel.Orientation = Orientation.Horizontal;
             basePanel.Margin = new Thickness(7);
+            basePanel.Cursor = Cursors.Hand;
             basePanel.MouseDown += SiteDisplay_MouseDown;
 
             Image logo = new Image();
@@ -94,11 +95,13 @@ namespace ExchangeStats
 
         private void SiteDisplay_MouseDown(object sender, MouseEventArgs e)
         {
+            Application.Current.MainWindow.Cursor = Cursors.Wait;
             StackPanel parentPanel = (StackPanel)sender;
             string siteName = (string)parentPanel.Children.OfType<Label>().First().Content;
             Site site = sites.Where(x => WebUtility.HtmlDecode(x.Name) == siteName).First();
 
-            this.ChangeContent(new SiteHome(site));
+            this.ChangeContent(new SiteBase(site, new SiteQuestions(site)));
+            Application.Current.MainWindow.Cursor = Cursors.Arrow;
         }
     }
 }

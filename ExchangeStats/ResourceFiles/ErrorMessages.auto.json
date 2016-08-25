@@ -1,0 +1,10 @@
+﻿{
+  "LoadingSites": {
+    "UserMessage": "A list of site names could not be fetched from Stack Exchange servers.",
+    "TechnicalDetails": "The API call method returned a null response: an exception occurred in RequestRawContent."
+  },
+  "NavActionNotRecognized": {
+    "UserMessage": "You tried to perform an action that the application can't process.",
+    "TechnicalDetails": "The action doesn't have an associated UserControl (SiteHome.navigationActions)."
+  }
+}
