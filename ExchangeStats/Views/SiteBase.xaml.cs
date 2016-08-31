@@ -38,7 +38,7 @@ namespace ExchangeStats.Views
             this.Loaded += SiteHome_Loaded;
         }
 
-        public void ChangeContent(UserControl newContent)
+        public void ChangeSubContent(UserControl newContent)
         {
             this.SubContent.Children.Clear();
             this.SubContent.Children.Add(newContent);
@@ -55,7 +55,7 @@ namespace ExchangeStats.Views
                 { "NavUsers", new SiteUsers(this.DisplaySite) }
             };
 
-            this.ChangeContent(this.initialView);
+            this.ChangeSubContent(this.initialView);
         }
 
         private void InitializeSiteDetails()
@@ -83,7 +83,7 @@ namespace ExchangeStats.Views
             FrameworkElement source = (FrameworkElement)sender;
             if (this.navigationActions.ContainsKey(source.Name))
             {
-                ((MainWindow)App.Current.MainWindow).ChangeContent(this.navigationActions[source.Name]);
+                this.ChangeSubContent(this.navigationActions[source.Name]);
             }
             else
             {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Net;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -44,11 +45,11 @@ namespace ExchangeStats.Views
             tagElement.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString(this.ParentSite.Style.TagForegroundColor));
             tagElement.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString(this.ParentSite.Style.TagBackgroundColor));
 
-            this.QuestionCount.Content = "x" + this.DisplayTag.QuestionCount.ToString();
+            this.QuestionCount.Content = "x " + this.DisplayTag.QuestionCount.ToString();
 
             if (this.Wiki.Excerpt != null)
             {
-                this.Description.Text = this.Wiki.Excerpt;
+                this.Description.Text = WebUtility.HtmlDecode(this.Wiki.Excerpt);
             }
             else
             {

@@ -214,10 +214,13 @@
     <Resource Include="Static\SELogoBlack.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Static\DefaultIcon.png" />
+    <Resource Include="Static\SEIcon.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ResourceFiles\Generic.auto.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Static\BetaBlank.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
