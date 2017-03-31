@@ -6,8 +6,11 @@
              xmlns:local="clr-namespace:ExchangeStats.Views"
              mc:Ignorable="d">
     <ScrollViewer VerticalScrollBarVisibility="Hidden">
-        <StackPanel Name="QuestionsPanel">
+        <StackPanel>
+            <StackPanel Name="QuestionsPanel">
 
+            </StackPanel>
+            <Label Name="LoadMore" Foreground="DodgerBlue" Cursor="Hand" MouseDown="LoadMore_MouseDown">load more</Label>
         </StackPanel>
     </ScrollViewer>
 </UserControl>

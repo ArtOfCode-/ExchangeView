@@ -44,4 +44,18 @@ namespace ExchangeStats.Contracts
         [DataMember(Name = "items")]
         public TagWiki[] TagWikis { get; set; }
     }
+
+    [DataContract]
+    public class UserResponse : Response
+    {
+        [DataMember(Name = "items")]
+        public User[] Users { get; set; }
+    }
+
+    [DataContract]
+    public class NetworkUserResponse : Response
+    {
+        [DataMember(Name = "items")]
+        public NetworkUser[] NetworkUsers { get; set; }
+    }
 }

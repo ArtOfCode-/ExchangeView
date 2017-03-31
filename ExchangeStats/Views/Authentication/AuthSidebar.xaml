@@ -1,0 +1,15 @@
+﻿<UserControl x:Class="ExchangeStats.Views.Authentication.AuthSidebar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ExchangeStats.Views.Authentication"
+             xmlns:c="clr-namespace:ExchangeStats.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="50">
+    <Grid>
+        <ContentControl HorizontalAlignment="Center" VerticalAlignment="Center">
+            <c:BrowserLink x:Name="AuthLink">Log In</c:BrowserLink>
+        </ContentControl>
+    </Grid>
+</UserControl>

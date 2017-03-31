@@ -1,0 +1,18 @@
+﻿<UserControl x:Class="ExchangeStats.Views.Authentication.FinishedAuth"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ExchangeStats.Views.Authentication"
+             mc:Ignorable="d">
+    <Grid>
+        <StackPanel Name="Success" Visibility="Visible">
+            <Label FontSize="24" HorizontalAlignment="Center">Done!</Label>
+            <TextBlock HorizontalAlignment="Center">You have been logged in as <TextBlock Name="Username"></TextBlock>.</TextBlock>
+        </StackPanel>
+        <StackPanel Name="Failed" Visibility="Hidden">
+            <Label FontSize="24" HorizontalAlignment="Center">Oops!</Label>
+            <TextBlock HorizontalAlignment="Center">Couldn't get an access token for your account. The token server responded with a status of <Label Name="StatusCode"></Label>.</TextBlock>
+        </StackPanel>
+    </Grid>
+</UserControl>

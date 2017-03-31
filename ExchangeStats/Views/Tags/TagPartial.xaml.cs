@@ -29,12 +29,15 @@ namespace ExchangeStats.Views
 
         public Site ParentSite { get; private set; }
 
-        public TagPartial(Tag displayTag, TagWiki wiki, Site parentSite)
+        private SiteBase parentFrame;
+
+        public TagPartial(Tag displayTag, TagWiki wiki, Site parentSite, SiteBase frame)
         {
             InitializeComponent();
             this.DisplayTag = displayTag;
             this.Wiki = wiki;
             this.ParentSite = parentSite;
+            this.parentFrame = frame;
             this.Loaded += TagPartial_Loaded;
         }
 
@@ -55,6 +58,11 @@ namespace ExchangeStats.Views
             {
                 this.Description.Text = App.GetResourceObject("TagNoExcerpt").ToString();
             }
+        }
+
+        private void TagElement_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            this.parentFrame.ChangeSubContent(new TagQuestions(this.DisplayTag, this.ParentSite));
         }
     }
 }

@@ -7,8 +7,11 @@
              mc:Ignorable="d">
     <Grid>
         <ScrollViewer VerticalScrollBarVisibility="Hidden">
-            <StackPanel Name="TagsPanel">
-                
+            <StackPanel>
+                <StackPanel Name="TagsPanel">
+
+                </StackPanel>
+                <Label Name="LoadMore" Foreground="DodgerBlue" Cursor="Hand" MouseDown="LoadMore_MouseDown">load more</Label>
             </StackPanel>
         </ScrollViewer>
     </Grid>

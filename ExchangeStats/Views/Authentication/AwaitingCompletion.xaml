@@ -1,0 +1,17 @@
+﻿<UserControl x:Class="ExchangeStats.Views.Authentication.AwaitingCompletion"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ExchangeStats.Views.Authentication"
+             mc:Ignorable="d">
+    <Grid>
+        <StackPanel>
+            <Label FontSize="24" HorizontalAlignment="Center">Authentication</Label>
+            <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center">You will now be taken to the Stack Exchange OAuth site to complete authentication. Once you approve this app's access to your account,
+                you will be redirected once more, and then asked to return to this app.</TextBlock>
+            <TextBlock HorizontalAlignment="Center">Once you've completed this, please 
+                <TextBlock Name="FinishedAuth" Foreground="DodgerBlue" TextDecorations="Underline" Cursor="Hand">click here</TextBlock> to finish authentication.</TextBlock>
+        </StackPanel>
+    </Grid>
+</UserControl>

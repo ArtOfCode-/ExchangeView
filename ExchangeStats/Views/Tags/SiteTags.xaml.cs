@@ -24,19 +24,24 @@ namespace ExchangeStats.Views
     {
         public Site DisplaySite { get; private set; }
 
-        public SiteTags(Site displaySite)
+        private SiteBase parentFrame;
+        private int currentPage = 1;
+
+        public SiteTags(Site displaySite, SiteBase frame)
         {
             InitializeComponent();
             this.DisplaySite = displaySite;
-            this.InitializeTagList();
+            this.parentFrame = frame;
+            this.InitializeTagList(this.currentPage.ToString());
         }
 
-        private void InitializeTagList()
+        private void InitializeTagList(string page)
         {
             string tagUri = StackApi.CreateRequestUri("tags", new Dictionary<string, string>
             {
                 { "site", this.DisplaySite.ApiSiteParameter },
-                { "pagesize", "20" }
+                { "pagesize", "20" },
+                { "page", page }
             });
             TagResponse response = StackApi.FireCacheableRequest<TagResponse>(tagUri, 1800);
 
@@ -51,10 +56,24 @@ namespace ExchangeStats.Views
 
             foreach(Tag tag in response.Tags)
             {
-                TagWiki wiki = wikiResponse.TagWikis.Where(x => x.TagName == tag.Name).First();
-                UserControl tagElement = new TagPartial(tag, wiki, this.DisplaySite);
+                TagWiki wiki;
+                try
+                {
+                    wiki = wikiResponse.TagWikis.First(x => x.TagName == tag.Name);
+                }
+                catch (InvalidOperationException)
+                {
+                    wiki = new TagWiki();
+                }
+                UserControl tagElement = new TagPartial(tag, wiki, this.DisplaySite, this.parentFrame);
                 this.TagsPanel.Children.Add(tagElement);
             }
+        }
+
+        private void LoadMore_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            this.currentPage += 1;
+            this.InitializeTagList(this.currentPage.ToString());
         }
     }
 }

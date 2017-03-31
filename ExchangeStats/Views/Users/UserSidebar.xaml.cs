@@ -12,22 +12,27 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
 using ExchangeStats.Contracts;
 
-namespace ExchangeStats.Views
+namespace ExchangeStats.Views.Users
 {
     /// <summary>
-    /// Interaction logic for SiteUsers.xaml
+    /// Interaction logic for UserSidebar.xaml
     /// </summary>
-    public partial class SiteUsers : UserControl
+    public partial class UserSidebar : UserControl
     {
-        public Site DisplaySite { get; set; }
+        public User DisplayUser { get; private set; }
 
-        public SiteUsers(Site displaySite)
+        public UserSidebar(User user)
         {
             InitializeComponent();
-            this.DisplaySite = displaySite;
+            DisplayUser = user;
+
+            Username.Text = user.DisplayName;
+            GoldBadges.Content = user.BadgeCounts.Gold;
+            SilverBadges.Content = user.BadgeCounts.Silver;
+            BronzeBadges.Content = user.BadgeCounts.Bronze;
+            Reputation.Content = user.Reputation;
         }
     }
 }

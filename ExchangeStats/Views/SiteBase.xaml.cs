@@ -51,7 +51,7 @@ namespace ExchangeStats.Views
             this.navigationActions = new Dictionary<string, UserControl>
             {
                 { "NavQuestions", new SiteQuestions(this.DisplaySite) },
-                { "NavTags", new SiteTags(this.DisplaySite) },
+                { "NavTags", new SiteTags(this.DisplaySite, this) },
                 { "NavUsers", new SiteUsers(this.DisplaySite) }
             };
 

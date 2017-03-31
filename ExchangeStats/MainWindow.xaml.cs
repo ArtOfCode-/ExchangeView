@@ -16,6 +16,8 @@ using System.Windows.Shapes;
 
 using ExchangeStats.Contracts;
 using ExchangeStats.Views;
+using ExchangeStats.Views.Authentication;
+using ExchangeStats.Views.Users;
 
 namespace ExchangeStats
 {
@@ -24,7 +26,7 @@ namespace ExchangeStats
     /// </summary>
     public partial class MainWindow : Window
     {
-        private List<Site> sites;
+        private List<Site> _sites;
 
         public MainWindow()
         {
@@ -36,6 +38,17 @@ namespace ExchangeStats
         {
             this.ContentFrame.Children.Clear();
             this.ContentFrame.Children.Add(newContent);
+        }
+
+        public List<Site> GetSitesList()
+        {
+            return _sites;
+        }
+
+        public void SetSignedInUser(User user)
+        {
+            this.UserFrame.Children.Clear();
+            this.UserFrame.Children.Add(new UserSidebar(user));
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
@@ -54,30 +67,48 @@ namespace ExchangeStats
                 return;
             }
 
-            sites = response.Sites.ToList<Site>();
+            _sites = response.Sites.ToList<Site>();
 
             foreach (Site site in response.Sites.OrderBy(x => x.Name))
             {
                 this.SitesPanel.Children.Add(this.CreateSiteDisplay(site));
             }
+
+            if (App.SignedInUser != null)
+            {
+                this.UserFrame.Children.Add(new UserSidebar(App.SignedInUser));
+            }
+            else
+            {
+                App.AuthenticatingGuid = Guid.NewGuid();
+                this.UserFrame.Children.Add(new AuthSidebar(string.Format("https://stackexchange.com/oauth/dialog?client_id={0}&scope={1}&redirect_uri={2}&state={3}",
+                                                                          App.ClientId, "read_inbox,no_expiry,write_access,private_info",
+                                                                          "https://auth.artofcode.co.uk/auth/redirect", App.AuthenticatingGuid)));
+            }
         }
 
         private UIElement CreateSiteDisplay(Site site)
         {
-            StackPanel basePanel = new StackPanel();
-            basePanel.Orientation = Orientation.Horizontal;
-            basePanel.Margin = new Thickness(7);
-            basePanel.Cursor = Cursors.Hand;
+            StackPanel basePanel = new StackPanel
+            {
+                Orientation = Orientation.Horizontal,
+                Margin = new Thickness(7),
+                Cursor = Cursors.Hand
+            };
             basePanel.MouseDown += SiteDisplay_MouseDown;
 
-            Image logo = new Image();
-            logo.Source = new BitmapImage(new Uri(site.IconUrl));
-            logo.Height = 28;
-            logo.Width = 28;
+            Image logo = new Image
+            {
+                Source = new BitmapImage(new Uri(site.IconUrl)),
+                Height = 28,
+                Width = 28
+            };
 
-            Label name = new Label();
-            name.Content = WebUtility.HtmlDecode(site.Name);
-            name.Foreground = new SolidColorBrush(Color.FromRgb(168, 172, 175));
+            Label name = new Label
+            {
+                Content = WebUtility.HtmlDecode(site.Name),
+                Foreground = new SolidColorBrush(Color.FromRgb(168, 172, 175))
+            };
 
             basePanel.Children.Add(logo);
             basePanel.Children.Add(name);
@@ -87,7 +118,7 @@ namespace ExchangeStats
         private void SiteSearch_PreviewKeyDown(object sender, KeyEventArgs e)
         {
             this.SitesPanel.Children.Clear();
-            foreach (Site site in sites.Where(x => WebUtility.HtmlDecode(x.Name).ToLower().Contains(this.SiteSearch.Text.ToLower())).OrderBy(x => x.Name))
+            foreach (Site site in _sites.Where(x => WebUtility.HtmlDecode(x.Name).ToLower().Contains(this.SiteSearch.Text.ToLower())).OrderBy(x => x.Name))
             {
                 this.SitesPanel.Children.Add(this.CreateSiteDisplay(site));
             }
@@ -98,7 +129,7 @@ namespace ExchangeStats
             Application.Current.MainWindow.Cursor = Cursors.Wait;
             StackPanel parentPanel = (StackPanel)sender;
             string siteName = (string)parentPanel.Children.OfType<Label>().First().Content;
-            Site site = sites.Where(x => WebUtility.HtmlDecode(x.Name) == siteName).First();
+            Site site = _sites.First(x => WebUtility.HtmlDecode(x.Name) == siteName);
 
             this.ChangeContent(new SiteBase(site, new SiteQuestions(site)));
             Application.Current.MainWindow.Cursor = Cursors.Arrow;

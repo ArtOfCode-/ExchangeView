@@ -24,6 +24,8 @@ namespace ExchangeStats.Views
     {
         public Site DisplaySite { get; private set; }
 
+        private int currentPage = 1;
+
         public SiteQuestions(Site displaySite)
         {
             InitializeComponent();
@@ -34,15 +36,16 @@ namespace ExchangeStats.Views
 
         private void SiteQuestions_Loaded(object sender, RoutedEventArgs e)
         {
-            this.InitializeQuestions();
+            this.InitializeQuestions(this.currentPage.ToString());
         }
 
-        private void InitializeQuestions()
+        private void InitializeQuestions(string page)
         {
             string questionsUri = StackApi.CreateRequestUri("questions", new Dictionary<string, string>
             {
                 { "site", this.DisplaySite.ApiSiteParameter },
-                { "pagesize", "50" }
+                { "pagesize", "50" },
+                { "page", page }
             });
             QuestionResponse response = StackApi.FireRequest<QuestionResponse>(questionsUri);
 
@@ -50,6 +53,12 @@ namespace ExchangeStats.Views
             {
                 this.QuestionsPanel.Children.Add(new QuestionPartial(question, this.DisplaySite));
             }
+        }
+
+        private void LoadMore_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            this.currentPage += 1;
+            this.InitializeQuestions(this.currentPage.ToString());
         }
     }
 }

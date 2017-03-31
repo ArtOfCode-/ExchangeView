@@ -77,6 +77,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ApiCache.cs" />
+    <Compile Include="Contracts\BadgeCount.cs" />
+    <Compile Include="Contracts\DSSToken.cs" />
+    <Compile Include="Contracts\NetworkUser.cs" />
     <Compile Include="Contracts\Question.cs" />
     <Compile Include="Contracts\RelatedSite.cs" />
     <Compile Include="Contracts\Response.cs" />
@@ -85,30 +88,46 @@
     <Compile Include="Contracts\Styling.cs" />
     <Compile Include="Contracts\Tag.cs" />
     <Compile Include="Contracts\TagWiki.cs" />
+    <Compile Include="Contracts\User.cs" />
     <Compile Include="Controls\BrowserLink.cs" />
     <Compile Include="Controls\PlaceholderTextBox.cs" />
     <Compile Include="NumberFormatter.cs" />
     <Compile Include="StackApi.cs" />
+    <Compile Include="Views\Authentication\AuthSidebar.xaml.cs">
+      <DependentUpon>AuthSidebar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Authentication\AwaitingCompletion.xaml.cs">
+      <DependentUpon>AwaitingCompletion.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Authentication\FinishedAuth.xaml.cs">
+      <DependentUpon>FinishedAuth.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ErrorReport.xaml.cs">
       <DependentUpon>ErrorReport.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\QuestionPartial.xaml.cs">
+    <Compile Include="Views\Questions\QuestionPartial.xaml.cs">
       <DependentUpon>QuestionPartial.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SiteBase.xaml.cs">
       <DependentUpon>SiteBase.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\SiteQuestions.xaml.cs">
+    <Compile Include="Views\Questions\SiteQuestions.xaml.cs">
       <DependentUpon>SiteQuestions.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\SiteTags.xaml.cs">
+    <Compile Include="Views\Tags\SiteTags.xaml.cs">
       <DependentUpon>SiteTags.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SiteUsers.xaml.cs">
       <DependentUpon>SiteUsers.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\TagPartial.xaml.cs">
+    <Compile Include="Views\Tags\TagPartial.xaml.cs">
       <DependentUpon>TagPartial.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Tags\TagQuestions.xaml.cs">
+      <DependentUpon>TagQuestions.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Users\UserSidebar.xaml.cs">
+      <DependentUpon>UserSidebar.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\WelcomeScreen.xaml.cs">
       <DependentUpon>WelcomeScreen.xaml</DependentUpon>
@@ -125,11 +144,23 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\Authentication\AuthSidebar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Authentication\AwaitingCompletion.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Authentication\FinishedAuth.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ErrorReport.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\QuestionPartial.xaml">
+    <Page Include="Views\Questions\QuestionPartial.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -137,11 +168,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\SiteQuestions.xaml">
+    <Page Include="Views\Questions\SiteQuestions.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\SiteTags.xaml">
+    <Page Include="Views\Tags\SiteTags.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -149,7 +180,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\TagPartial.xaml">
+    <Page Include="Views\Tags\TagPartial.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Tags\TagQuestions.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Users\UserSidebar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -16,12 +16,14 @@
         <Grid Grid.Column="0" Background="#242729">
             <Grid.RowDefinitions>
                 <RowDefinition Height="70" />
+                <RowDefinition Height="50"></RowDefinition>
                 <RowDefinition Height="30" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Image Source="pack://application:,,,/Static/SELogo.png" Grid.Row="0" />
-            <c:PlaceholderTextBox x:Name="SiteSearch" Grid.Row="1" Margin="3" Padding="3"  PreviewKeyDown="SiteSearch_PreviewKeyDown" PlaceholderText="Search Sites..." />
-            <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Hidden">
+            <Grid Name="UserFrame" Grid.Row="1" HorizontalAlignment="Stretch" Margin="3"></Grid>
+            <c:PlaceholderTextBox x:Name="SiteSearch" Grid.Row="2" Margin="3" Padding="3"  PreviewKeyDown="SiteSearch_PreviewKeyDown" PlaceholderText="Search Sites..." />
+            <ScrollViewer Grid.Row="3" VerticalScrollBarVisibility="Hidden">
                 <StackPanel Name="SitesPanel">
                     
                 </StackPanel>

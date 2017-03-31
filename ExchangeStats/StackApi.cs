@@ -60,7 +60,7 @@ namespace ExchangeStats
         /// Given a raw string response from the API, serializes it into a Response-type object.
         /// </summary>
         /// <typeparam name="T">The type of response expected from this API request. Must derive from Response.</typeparam>
-        /// <param name="requestUri">The fully-qualified URI to request from.</param>
+        /// <param name="responseContent">The raw response content to serialize.</param>
         /// <returns>A Response object containing the data returned from the API.</returns>
         public static T SerializeRawResponse<T>(string responseContent) where T : Response
         {

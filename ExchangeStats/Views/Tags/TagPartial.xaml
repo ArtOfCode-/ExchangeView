@@ -8,7 +8,7 @@
     <Grid>
         <StackPanel>
             <StackPanel Orientation="Horizontal">
-                <Label Name="TagElement" Padding="5" Margin="5 0" BorderBrush="LightGray" BorderThickness="1"></Label>
+                <Label Name="TagElement" Padding="5" Margin="5 0" BorderBrush="LightGray" BorderThickness="1" Cursor="Hand" MouseDown="TagElement_MouseDown"></Label>
                 <Label Name="QuestionCount" Foreground="Gray"></Label>
             </StackPanel>
             <TextBlock Name="Description" Margin="5"></TextBlock>

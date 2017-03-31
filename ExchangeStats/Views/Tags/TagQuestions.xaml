@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="ExchangeStats.Views.SiteUsers"
+﻿<UserControl x:Class="ExchangeStats.Views.TagQuestions"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,6 +6,11 @@
              xmlns:local="clr-namespace:ExchangeStats.Views"
              mc:Ignorable="d">
     <Grid>
-            
+        <ScrollViewer VerticalScrollBarVisibility="Hidden">
+            <StackPanel>
+                <Label Name="TagDetails"></Label>
+                <StackPanel Name="QuestionsPanel"></StackPanel>
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </UserControl>
