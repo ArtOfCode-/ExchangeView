@@ -215,6 +215,8 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="cabinfo.ddf" />
+    <None Include="ExchangeView.wxs" />
     <None Include="Install.bat" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

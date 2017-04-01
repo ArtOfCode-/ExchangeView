@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Wix xmlns='http://schemas.microsoft.com/wix/2006/wi'>
+  <Product Name='ExchangeView' Manufacturer='ArtOfCode'
+           Id='491a1cd4-1d20-4497-a7c2-e06e75cccc9b'
+           UpgradeCode='fcdaec0d-17f9-4692-989d-4f06f74bb3ee'
+           Language='1033' Codepage='1252' Version='1.0.0'>
+    <Package Id='*' Keywords='Installer' Description="ExchangeView Installer"
+             Manufacturer='ArtOfCode' InstallerVersion='100' Languages='1033' Compressed='yes' SummaryCodepage='1252' />
+    <Media Id='1' Cabinet='Package.cab' EmbedCab='yes' />
+      
+    <Directory Id='TARGETDIR' Name='SourceDir'>
+      <Directory Id='ProgramFilesFolder' Name='PFiles'>
+        <Directory Id='ArtOfCode' Name='ArtOfCode'>
+          <Directory Id='INSTALLDIR' Name='ExchangeView'>
+            <Component Id='MainExecutable' Guid='31c801f4-b0e1-4fe5-8753-dcaa73f36f10'>
+              <File Id='EVExe' Name='ExchangeView.exe' DiskId='1' Source='$(sys.SOURCEFILEDIR)bin/Debug/ExchangeStats.exe' KeyPath='yes'>
+                <Shortcut Id='DesktopExeShortcut' Directory='DesktopFolder' Name='ExchangeView' WorkingDirectory='INSTALLDIR' Advertise='yes' />
+                <Shortcut Id='ProgramMenuExeShortcut' Directory='ProgramMenuFolder' Name='ExchangeView' WorkingDirectory='INSTALLDIR' Advertise='yes' />
+              </File>
+              <File Id='EVExeConfig' Name='ExchangeView.exe.config' DiskId='1' Source='$(sys.SOURCEFILEDIR)bin/Debug/ExchangeStats.exe.config' />
+              <File Id='EVSymbols' Name='ExchangeView.pdb' DiskId='1' Source='$(sys.SOURCEFILEDIR)bin/Debug/ExchangeStats.pdb' />
+            </Component>
+            
+            <Component Id='Libraries' Guid='b3eb438f-f06e-43e2-8a91-55e58f8acb23'>
+              <File Id='NewtonsoftJsonDll' DiskId='1' Source='$(sys.SOURCEFILEDIR)bin/Debug/Newtonsoft.Json.dll' KeyPath='yes' />
+              <File Id='NewtonsoftJsonXml' DiskId='1' Source='$(sys.SOURCEFILEDIR)bin/Debug/Newtonsoft.Json.xml' />
+            </Component>
+          </Directory>
+        </Directory>
+      </Directory>
+      
+      <Directory Id='AppDataFolder' Name='AppData'>
+        <Directory Id='ExchangeStats' Name='ExchangeStats'>
+          <Directory Id='Resources' Name='Resources'>
+            <Component Id='Resources' Guid='d89ef0c3-1e9b-4c4a-b2b6-39c2c67bdb6e'>
+              <File Id='ErrorMessages' DiskId='1' Source='$(sys.SOURCEFILEDIR)ResourceFiles/ErrorMessages.auto.json' />
+              <File Id='Generic' DiskId='1' Source='$(sys.SOURCEFILEDIR)ResourceFiles/Generic.auto.json' />
+
+              <RegistryValue Root='HKCU' Key='Software\ArtOfCode\ExchangeView\Resources' Type='string' Value='' KeyPath='yes' />
+              <RemoveFolder Id='Resources' On='uninstall' />
+              <RemoveFolder Id='ExchangeStats' Directory='ExchangeStats' On='uninstall' />
+            </Component>
+          </Directory>
+          <Directory Id='Cache' Name='Cache'>
+            <Component Id='Cache' Guid='537d92d8-a4c4-4ecd-8a90-32874f3926c9'>
+              <File Id='CacheInfo' DiskId='1' Source='$(sys.SOURCEFILEDIR)ResourceFiles/CacheInfo.dat' />
+              
+              <RegistryValue Root='HKCU' Key='Software\ArtOfCode\ExchangeView\Cache' Type='string' Value='' KeyPath='yes' />
+              <RemoveFolder Id='Cache' On='uninstall' />
+            </Component>
+          </Directory>
+        </Directory>
+      </Directory>
+    
+      <Directory Id='ProgramMenuFolder' Name='Programs'>
+        <Directory Id='ProgramMenuDir' Name='ExchangeView'>
+          <Component Id='ProgramMenuDir' Guid='85179fde-6308-46c6-9cdb-d743b04e75df'>
+            <RemoveFolder Id='ProgramMenuDir' On='uninstall' />
+            <RegistryValue Root='HKCU' Key='Software\ArtOfCode\ExchangeView' Type='string' Value='' KeyPath='yes' />
+          </Component>
+        </Directory>
+      </Directory>
+    
+      <Directory Id='DesktopFolder' Name='Desktop' />
+    </Directory>
+    
+    <Feature Id='CompleteInstall' Level='1'>
+      <ComponentRef Id='MainExecutable' />
+      <ComponentRef Id='Libraries' />
+      <ComponentRef Id='ProgramMenuDir' />
+      <ComponentRef Id='Resources' />
+      <ComponentRef Id='Cache' />
+    </Feature>
+  </Product>
+</Wix> 
